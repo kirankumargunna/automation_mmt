@@ -10,7 +10,7 @@ from selenium.webdriver.support import expected_conditions as EC
 class Webelement(Webdrivers):
 
     @classmethod
-    def findElement(cls, element_locator, selector="xpath"):
+    def findElement(cls, element_locator):
 
         """
         returns web element for given element locator
@@ -19,22 +19,9 @@ class Webelement(Webdrivers):
         """
         if not cls._browser:
             raise ValueError("Browser not initialized. Call set_browser() first.")
-        if selector == "xpath":
-            return cls._browser.find_element(By.XPATH,element_locator)
-        if selector == "id":
-            return cls._browser.find_element(By.ID,element_locator)
-        if selector == "link text":
-            return cls._browser.find_element(By.LINK_TEXT,element_locator)
-        if selector == "partial link text":
-            return cls._browser.find_element(By.PARTIAL_LINK_TEXT,element_locator)
-        if selector == "name":
-            return cls._browser.find_element(By.NAME,element_locator)
-        if selector == "tag name":
-            return cls._browser.find_element(By.TAG_NAME,element_locator)
-        if selector == "class name":
-            return cls._browser.find_element(By.CLASS_NAME,element_locator)
-        if selector == "css selector":
-            return cls._browser.find_element(By.CSS_SELECTOR,element_locator)
+
+        return cls._browser.find_element(*(element_locator))
+
 
     @classmethod
     def findElements(cls, element_locator, selector="xpath"):
@@ -46,39 +33,24 @@ class Webelement(Webdrivers):
         """
         if not cls._browser:
             raise ValueError("Browser not initialized. Call set_browser() first.")
-        if selector == "xpath":
-            return cls._browser.find_elements(By.XPATH, element_locator)
-        if selector == "id":
-            return cls._browser.find_elements(By.ID, element_locator)
-        if selector == "link text":
-            return cls._browser.find_elements(By.LINK_TEXT, element_locator)
-        if selector == "partial link text":
-            return cls._browser.find_elements(By.PARTIAL_LINK_TEXT, element_locator)
-        if selector == "name":
-            return cls._browser.find_elements(By.NAME, element_locator)
-        if selector == "tag name":
-            return cls._browser.find_elements(By.TAG_NAME, element_locator)
-        if selector == "class name":
-            return cls._browser.find_elements(By.CLASS_NAME, element_locator)
-        if selector == "css selector":
-            return cls._browser.find_elements(By.CSS_SELECTOR, element_locator)
+        return cls._browser.find_elements(*(element_locator))
 
     @classmethod
-    def click_element(cls,locator,selector):
+    def click_element(cls,element_locator):
         if not cls._browser:
             raise ValueError("Browser not initialized. Call pytest_start_browser() first.")
-        element=cls.findElement(locator,selector)
+        element=cls.findElement(*(element_locator))
         element.click()
 
     @classmethod
-    def is_element_displayed(cls,locator,selector):
+    def is_element_displayed(cls,element_locator):
         if not cls._browser:
             raise ValueError("Browser not initialized. Call pytest_start_browser() first.")
-        element = cls.findElement(locator, selector)
+        element = cls.findElement(*(element_locator))
         return element.is_displayed()
 
     @classmethod
-    def verify_page_refresh(cls,locator,selector):
+    def verify_page_refresh(cls,element_locator):
         """
             Verifies if clicking the logo refreshes the page using window.onbeforeunload.
 
@@ -101,7 +73,7 @@ class Webelement(Webdrivers):
             """)
 
         # tirgger a potential refresh
-        element=cls.findElement(locator,selector)
+        element=cls.findElement(*(element_locator))
         element.click()
 
         # wait for the page to refresh
@@ -121,13 +93,13 @@ class Webelement(Webdrivers):
             return False
 
     @classmethod
-    def verify_new_tab(cls,locator,selector):
+    def verify_new_tab(cls, element_locator=None):
 
         # get the no of tabs before clicking
         initial_tabs=cls._browser.window_handles
 
         # click the hyperlink (expected to open a new tab)
-        element=cls.findElement(locator,selector)
+        element=cls.findElement(*(element_locator))
         element.click()
 
         #wait for the tab to open
@@ -158,64 +130,18 @@ class Webelement(Webdrivers):
         return WebDriverWait(cls._browser,timeout)
 
     @classmethod
-    def wait_for_element_presence(cls, element_locator,  selector="xpath"):
+    def wait_for_element_presence(cls, element_locator):
         if not cls._browser:
             raise ValueError("Browser not initialized. Call set_browser() first.")
-        if selector == "xpath":
-            return cls.wait(10).until(
-                EC.presence_of_element_located((By.XPATH, element_locator)))
-        if selector == "id":
-            return cls.wait(10).until(
-                EC.presence_of_element_located((By.ID, element_locator)))
-        if selector == "link text":
-            return cls.wait(10).until(
-                EC.presence_of_element_located((By.LINK_TEXT, element_locator)))
-        if selector == "partial link text":
-            return cls.wait(10).until(
-                EC.presence_of_element_located((By.PARTIAL_LINK_TEXT, element_locator)))
-        if selector == "name":
-            return cls.wait(10).until(
-                EC.presence_of_element_located((By.NAME, element_locator)))
-        if selector == "tag name":
-            return cls.wait(10).until(
-                EC.presence_of_element_located((By.TAG_NAME, element_locator)))
-        if selector == "class name":
-            return cls.wait(10).until(
-                EC.presence_of_element_located((By.CLASS_NAME, element_locator)))
-        if selector == "css selector":
-            return cls.wait(10).until(
-                EC.presence_of_element_located((By.CSS_SELECTOR, element_locator)))
+        return cls.wait(10).until(EC.presence_of_element_located(element_locator))
 
     @classmethod
     def wait_for_all_elements_presence(cls, elements_locator, selector="xpath"):
         if not cls._browser:
             raise ValueError("Browser not initialized. Call set_browser() first.")
-        if selector == "xpath":
-            return cls.wait(10).until(
-                EC.presence_of_all_elements_located((By.XPATH, elements_locator)))
-        if selector == "id":
-            return cls.wait(10).until(
-                EC.presence_of_all_elements_located((By.ID, elements_locator)))
-        if selector == "link text":
-            return cls.wait(10).until(
-                EC.presence_of_all_elements_located((By.LINK_TEXT, elements_locator)))
-        if selector == "partial link text":
-            return cls.wait(10).until(
-                EC.presence_of_all_elements_located((By.PARTIAL_LINK_TEXT, elements_locator)))
-        if selector == "name":
-            return cls.wait(10).until(
-                EC.presence_of_all_elements_located((By.NAME, elements_locator)))
-        if selector == "tag name":
-            return cls.wait(10).until(
-                EC.presence_of_all_elements_located((By.TAG_NAME, elements_locator)))
-        if selector == "class name":
-            return cls.wait(10).until(
-                EC.presence_of_all_elements_located((By.CLASS_NAME, elements_locator)))
-        if selector == "css selector":
-            return cls.wait(10).until(
-                EC.presence_of_all_elements_located((By.CSS_SELECTOR, elements_locator)))
+        return cls.wait(10).until(EC.presence_of_all_elements_located((By.XPATH, elements_locator)))
 
     @classmethod
-    def mousehover(cls,locator,selector):
-        element=cls.findElement(locator,selector)
+    def mousehover(cls,element_locator):
+        element=cls.findElement(element_locator)
         cls.mouse.move_to_element(element).perform()

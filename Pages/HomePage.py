@@ -18,12 +18,12 @@ class Homepage_mmt(Webelement):
 
 
     def logo_visablity_and_navigation(self):
-        assert Webelement.is_element_displayed(Homepage_mmt.logo_mmt(),"xpath"), "make my trip logo logo is not displayed"
-        assert Webelement.verify_page_refresh(Homepage_mmt.logo_mmt(),"xpath"), "page not refreshed on mmt logo"
+        assert Webelement.is_element_displayed(Homepage_mmt.logo_mmt()), "make my trip logo logo is not displayed"
+        assert Webelement.verify_page_refresh(Homepage_mmt.logo_mmt()), "page not refreshed on mmt logo"
 
     def list_your_property_hyperlink(self):
-        assert Webelement.is_element_displayed(Homepage_mmt.list_your_property(),"xpath"), "list you propert hyperlink is not displayed"
-        assert Webelement.verify_new_tab(Homepage_mmt.list_your_property(),"xpath")==homepagedata.list_your_properties_pageTitle
+        assert Webelement.is_element_displayed(Homepage_mmt.list_your_property()), "list you propert hyperlink is not displayed"
+        assert Webelement.verify_new_tab(Homepage_mmt.list_your_property())==homepagedata.list_your_properties_pageTitle
         Homepage_mmt.close_current_tab()
     def  introducing_mybiz(self):
         assert Webelement.is_element_displayed((homepage_locators.LIST_YOUR_PROPERTY,))

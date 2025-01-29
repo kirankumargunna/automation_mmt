@@ -19,8 +19,8 @@ class BasePageFragments(Webelement):
 
 
     def close_login_model(self):
-        Webelement.wait_for_element_presence(BasePageFragments.login_model(),"xpath")
-        Webelement.click_element(BasePageFragments.login_model(),"xpath")
+        Webelement.wait_for_element_presence(BasePageFragments.login_model())
+        Webelement.click_element(BasePageFragments.login_model())
 
 
 
