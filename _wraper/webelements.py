@@ -20,11 +20,11 @@ class Webelement(Webdrivers):
         if not cls._browser:
             raise ValueError("Browser not initialized. Call set_browser() first.")
 
-        return cls._browser.find_element(*(element_locator))
+        return cls._browser.find_element(*element_locator)
 
 
     @classmethod
-    def findElements(cls, element_locator, selector="xpath"):
+    def findElements(cls, element_locator):
 
         """
         returns web element for given element locator
@@ -33,21 +33,22 @@ class Webelement(Webdrivers):
         """
         if not cls._browser:
             raise ValueError("Browser not initialized. Call set_browser() first.")
-        return cls._browser.find_elements(*(element_locator))
+        return cls._browser.find_elements(*element_locator)
 
     @classmethod
     def click_element(cls,element_locator):
         if not cls._browser:
             raise ValueError("Browser not initialized. Call pytest_start_browser() first.")
-        element=cls.findElement(*(element_locator))
+        element=cls.findElement(element_locator)
         element.click()
 
     @classmethod
     def is_element_displayed(cls,element_locator):
         if not cls._browser:
             raise ValueError("Browser not initialized. Call pytest_start_browser() first.")
-        element = cls.findElement(*(element_locator))
-        return element.is_displayed()
+        element = cls.findElement(element_locator)
+        return element
+        # return element.is_displayed()
 
     @classmethod
     def verify_page_refresh(cls,element_locator):
@@ -73,7 +74,7 @@ class Webelement(Webdrivers):
             """)
 
         # tirgger a potential refresh
-        element=cls.findElement(*(element_locator))
+        element=cls.findElement(element_locator)
         element.click()
 
         # wait for the page to refresh
@@ -91,7 +92,9 @@ class Webelement(Webdrivers):
         else:
             print("❌ Page did not refresh.")
             return False
-
+    @classmethod
+    def page_title(cls):
+        return cls._browser.title
     @classmethod
     def verify_new_tab(cls, element_locator=None):
 
@@ -99,7 +102,7 @@ class Webelement(Webdrivers):
         initial_tabs=cls._browser.window_handles
 
         # click the hyperlink (expected to open a new tab)
-        element=cls.findElement(*(element_locator))
+        element=cls.findElement(element_locator)
         element.click()
 
         #wait for the tab to open
@@ -111,12 +114,12 @@ class Webelement(Webdrivers):
 
             #switch to new tab
 
-            cls._browser.switch_to.window(new_tabs[-1])
-            print(cls._browser.title)
+            cls.switch_tab(-1)
+            print(cls.page_title())
 
             # return the new tap page title
 
-            return cls._browser.title
+            return cls.page_title()
         else:
             print("❌ No new tab opened.")
             return "No new tab opened "
@@ -124,6 +127,12 @@ class Webelement(Webdrivers):
     @classmethod
     def close_current_tab(cls):
         cls._browser.close()
+
+    @classmethod
+    def switch_tab(cls,tab):
+        handles=cls._browser.window_handles
+        print(handles)
+        cls._browser.switch_to.window(handles[int(tab)])
 
     @classmethod
     def wait(cls,timeout: int):
@@ -136,12 +145,17 @@ class Webelement(Webdrivers):
         return cls.wait(10).until(EC.presence_of_element_located(element_locator))
 
     @classmethod
-    def wait_for_all_elements_presence(cls, elements_locator, selector="xpath"):
+    def wait_for_all_elements_presence(cls, elements_locator):
         if not cls._browser:
             raise ValueError("Browser not initialized. Call set_browser() first.")
-        return cls.wait(10).until(EC.presence_of_all_elements_located((By.XPATH, elements_locator)))
+        return cls.wait(10).until(EC.presence_of_all_elements_located( elements_locator))
 
     @classmethod
     def mousehover(cls,element_locator):
         element=cls.findElement(element_locator)
         cls.mouse.move_to_element(element).perform()
+
+    @classmethod
+    def gettext(cls,element_locator):
+        element=cls.findElement(element_locator)
+        return element.text
