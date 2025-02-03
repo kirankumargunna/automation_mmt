@@ -4,7 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d50979c-3167-40c7-9f96-5439d55adc83" name="Changes" comment="commit" />
+    <list default="true" id="6d50979c-3167-40c7-9f96-5439d55adc83" name="Changes" comment="commit">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Locators/homepage_locators.py" beforeDir="false" afterPath="$PROJECT_DIR$/Locators/homepage_locators.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/HomePage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/HomePage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/base_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/base_page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/conftest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/test_mmt_homepage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/test_mmt_homepage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_data/data.py" beforeDir="false" afterPath="$PROJECT_DIR$/_data/data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_wraper/webelements.py" beforeDir="false" afterPath="$PROJECT_DIR$/_wraper/webelements.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -47,7 +56,7 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "D:/cognine-crm-automation",
+    "last_opened_file_path": "D:/selenium_python/Selenium Scripts/MakeMyTrip.py",
     "settings.editor.selected.configurable": "inlay.hints"
   }
 }]]></component>
@@ -149,7 +158,23 @@
       <option name="project" value="LOCAL" />
       <updated>1738302549343</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="commit">
+      <option name="closed" value="true" />
+      <created>1738304969495</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1738304969495</updated>
+    </task>
+    <task id="LOCAL-00008" summary="commit">
+      <option name="closed" value="true" />
+      <created>1738305022851</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1738305022851</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

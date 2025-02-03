@@ -39,18 +39,18 @@ def pytest_runtest_setup(item:Item) -> None:
     driver.get(base_url)
 
 
-def pytest_runtest_teardown()-> None:
-    """Pytest hook for teardown after each test.
-
-        Checks if the 'driver' variable is present in the local or global namespace.
-        If found, it calls the 'quit()' method on the 'driver' object to close the browser.
-
-        Note: This function assumes that the 'driver' variable is used for browser automation,
-        and its presence is necessary for cleanup.
-
-        Returns:
-            None
-        """
-
-    if "driver" in locals() or "driver" in globals():
-        driver.quit()
+# def pytest_runtest_teardown()-> None:
+#     """Pytest hook for teardown after each test.
+#
+#         Checks if the 'driver' variable is present in the local or global namespace.
+#         If found, it calls the 'quit()' method on the 'driver' object to close the browser.
+#
+#         Note: This function assumes that the 'driver' variable is used for browser automation,
+#         and its presence is necessary for cleanup.
+#
+#         Returns:
+#             None
+#         """
+#
+#     if "driver" in locals() or "driver" in globals():
+#         driver.quit()

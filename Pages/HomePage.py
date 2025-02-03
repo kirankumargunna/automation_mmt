@@ -1,6 +1,7 @@
 import time
 
 from numpy.ma.testutils import assert_equal
+from selenium.webdriver.common.by import By
 
 from Drivers.webdrivers import Webdrivers
 from Locators.homepage_locators import homepage_locators
@@ -16,6 +17,12 @@ class Homepage_mmt(BasePageFragments):
     introducing_Mybiz=homepage_locators.INTROUDUCING_MYBIZ
     toolTip_introducing_mybiz=homepage_locators.TOOLTIP_INTROUDUCING_MYBIZ
     login_or_createAccount=homepage_locators.LOGIN_OR_CREATEACCOUNT
+    navigation_bar=homepage_locators.ICONS_NAVIGATION_BAR
+    source_city=homepage_locators.FROM_CITY
+    destination_city=homepage_locators.TO_CITY
+    input_field=homepage_locators.INPUT_FIELD
+    depature=homepage_locators.DEPATURE
+    search=homepage_locators.SEARCH
 
 
 
@@ -40,3 +47,19 @@ class Homepage_mmt(BasePageFragments):
         Webelement.click_element(Homepage_mmt.login_or_createAccount)
         assert Webelement.is_element_displayed(Homepage_mmt.login_mobilenumber), "user is not prompted to login after clicking on login button"
         Webelement.click_element(Homepage_mmt.close_loginModel)
+
+    def get_elements_navigation_bar(self):
+        element_list=Webelement.findElements(Homepage_mmt.navigation_bar)
+        return [name for name in element_list.text]
+
+    def flight_search(self):
+        Webelement.click_element(Homepage_mmt.source_city)
+        Webelement.send_text(Homepage_mmt.input_field,self.homepagedata.Domestic_cities[1])
+        Webelement.click_element(Homepage_mmt.destination_city)
+        Webelement.send_text(Homepage_mmt.input_field,homepagedata.International_cities[1])
+        Webelement.click_element(Homepage_mmt.depature)
+        Webelement.set_date(homepagedata.travel_date)
+        Webelement.click_element(Homepage_mmt.search)
+
+
+

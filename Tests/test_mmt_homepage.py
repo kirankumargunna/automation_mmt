@@ -1,10 +1,14 @@
+import pytest
+
 from Pages.HomePage import Homepage_mmt
 from Pages.base_page import BasePageFragments
 
 
-class Test_mmt_homepage:
+class Test_mmt_homepage(BasePageFragments):
 
         #navigate to make my trip webpage
+        # @pytest.mark.homepage
+        @pytest.mark.smoke
         def test_homepage_elements(self):
                 #close the login window after opening the webpage
                 BasePageFragments.close_login_model(self)
@@ -20,3 +24,12 @@ class Test_mmt_homepage:
 
                 #verify that login or create account is visable and clicking it should prompt the user to login
                 Homepage_mmt.login_or_createaccount(self)
+
+                # verify the elemtents in home page navigation bar
+
+                # assert_equal(Homepage_mmt.get_elements_navigation_bar(self),self.homepagedata.elements_navigation_bar
+
+        @pytest.mark.homepage
+        def test_flights_homepage(self):
+                BasePageFragments.close_login_model(self)
+                Homepage_mmt.flight_search(self)

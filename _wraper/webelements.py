@@ -1,10 +1,15 @@
 import time
-from asyncio import timeout
+
+from pyautogui import click
+from selenium.webdriver import Keys
+from selenium.webdriver.common.by import By
 
 from Drivers.webdrivers import Webdrivers
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+
+from _data.data import homepagedata
+from _wraper import helper
 
 
 class Webelement(Webdrivers):
@@ -39,7 +44,7 @@ class Webelement(Webdrivers):
     def click_element(cls,element_locator):
         if not cls._browser:
             raise ValueError("Browser not initialized. Call pytest_start_browser() first.")
-        element=cls.findElement(element_locator)
+        element=cls.wait_for_element_presence(element_locator)
         element.click()
 
     @classmethod
@@ -159,3 +164,29 @@ class Webelement(Webdrivers):
     def gettext(cls,element_locator):
         element=cls.findElement(element_locator)
         return element.text
+
+    @classmethod
+    def send_text(cls,element_locator,text):
+        element=cls.wait_for_element_presence(element_locator)
+        element.send_keys(text)
+        element.send_keys(Keys.DOWN)
+        element.send_keys(Keys.ENTER)
+
+    @classmethod
+    def set_date(cls,date):
+        date, month_year = helper.get_date_of_travel(date)
+        element_found = False
+        while element_found == False:
+            try:
+                # Try to locate the element with the provided XPath
+                element = Webelement.findElement((By.XPATH,f"//div[@class='DayPicker-Caption']/div[text()='{month_year}']"))
+                element_found = True  # Return True if the element is found
+
+            except Exception as e:
+                # If the element is not found, print an error and continue to the next iteration
+                print(f"Element not found, retrying... {e}")
+                next_month = Webelement.findElement((By.XPATH,"//span[@role='button' and @class='DayPicker-NavButton DayPicker-NavButton--next']"))
+                cls.click_element(next_month)
+                cls.click_element(next_month)
+
+        Webelement.click_element((By.XPATH,f"//div[@role='gridcell' and @class='DayPicker-Day' and @aria-label='{date}']"))
