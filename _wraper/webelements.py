@@ -47,6 +47,7 @@ class Webelement(Webdrivers):
 
     @classmethod
     def findElements(cls, element_locator):
+    def findElements(cls, element_locator):
 
         """
         returns web element for given element locator
@@ -98,6 +99,7 @@ class Webelement(Webdrivers):
 
         # tirgger a potential refresh
         element=cls.findElement(element_locator)
+        element=cls.findElement(element_locator)
         element.click()
 
         # wait for the page to refresh
@@ -119,12 +121,16 @@ class Webelement(Webdrivers):
     def page_title(cls):
         return cls._browser.title
     @classmethod
+    def page_title(cls):
+        return cls._browser.title
+    @classmethod
     def verify_new_tab(cls, element_locator=None):
 
         # get the no of tabs before clicking
         initial_tabs=cls._browser.window_handles
 
         # click the hyperlink (expected to open a new tab)
+        element=cls.findElement(element_locator)
         element=cls.findElement(element_locator)
         element.click()
 
@@ -143,6 +149,7 @@ class Webelement(Webdrivers):
             # return the new tap page title
 
             return cls.page_title()
+            return cls.page_title()
         else:
             print("❌ No new tab opened.")
             return "No new tab opened "
@@ -150,6 +157,12 @@ class Webelement(Webdrivers):
     @classmethod
     def close_current_tab(cls):
         cls._browser.close()
+
+    @classmethod
+    def switch_tab(cls,tab):
+        handles=cls._browser.window_handles
+        print(handles)
+        cls._browser.switch_to.window(handles[int(tab)])
 
     @classmethod
     def switch_tab(cls,tab):

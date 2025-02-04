@@ -14,6 +14,7 @@ class Test_mmt_homepage(BasePageFragments):
         @pytest.mark.smoke
         def test_homepage_elements(self):
                 #close the login window after opening the webpage
+                #close the login window after opening the webpage
                 BasePageFragments.close_login_model(self)
 
                 #verify that make my trip logo is visable and on clicking it will navigate to home page
