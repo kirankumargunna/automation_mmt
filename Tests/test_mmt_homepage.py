@@ -1,5 +1,5 @@
 import pytest
-
+import allure
 from Pages.HomePage import Homepage_mmt
 from Pages.base_page import BasePageFragments
 
@@ -7,7 +7,10 @@ from Pages.base_page import BasePageFragments
 class Test_mmt_homepage(BasePageFragments):
 
         #navigate to make my trip webpage
-        # @pytest.mark.homepage
+        @allure.title("homepage smoke test")
+        @allure.description('to verify the all the elements are loaded in the home page')
+        @allure.severity(allure.severity_level.CRITICAL)
+        @pytest.mark.homepage
         @pytest.mark.smoke
         def test_homepage_elements(self):
                 #close the login window after opening the webpage
@@ -33,3 +36,8 @@ class Test_mmt_homepage(BasePageFragments):
         def test_flights_homepage(self):
                 BasePageFragments.close_login_model(self)
                 Homepage_mmt.flight_search(self)
+
+        @pytest.mark.homepage
+        def test_buses_homepage(self):
+                BasePageFragments.close_login_model(self)
+                Homepage_mmt.bus_search(self)

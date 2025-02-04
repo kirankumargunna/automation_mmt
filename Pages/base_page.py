@@ -17,7 +17,7 @@ class BasePageFragments(Webelement):
         cls.h=helper
 
     def close_login_model(self):
-        Webelement.wait_for_element_presence(BasePageFragments.close_loginModel)
+        Webelement.wait_for_element_visible(BasePageFragments.close_loginModel)
         Webelement.is_element_displayed(BasePageFragments.login_mobilenumber)
         Webelement.click_element(BasePageFragments.close_loginModel)
 

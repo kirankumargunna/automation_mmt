@@ -11,8 +11,11 @@ class homepage_locators:
     LOGIN_OR_CREATEACCOUNT=(By.XPATH,"//li[@class='makeFlex hrtlCenter font10 makeRelative lhUser userLoggedOut']")
     ICONS_NAVIGATION_BAR=(By.XPATH,"//span[@class='headerIconTextAlignment chNavText darkGreyText']")
 
-    FROM_CITY=(By.XPATH,"//div[@class='flt_fsw_inputBox searchCity inactiveWidget ']")
-    TO_CITY=(By.XPATH,"//div[@class='flt_fsw_inputBox searchToCity inactiveWidget ']")
-    INPUT_FIELD=(By.XPATH, "//input[@class='react-autosuggest__input react-autosuggest__input--open']")
+    FROM_CITY=(By.ID,"fromCity")
+    TO_CITY=(By.ID,"toCity")
+    INPUT_FIELD=(By.CSS_SELECTOR, '.react-autosuggest__input.react-autosuggest__input--open')
     DEPATURE=(By.ID,"departure")
-    SEARCH=(By.XPATH,"//p[@class='makeFlex vrtlCenter']")
+    SEARCH=(By.XPATH,"//*[contains(@class,'primaryBtn font24 latoBold widgetSearchBtn')]")
+
+    buses_icon=(By.XPATH,"//span[@class='chNavIcon appendBottom2 chSprite chBuses inactive']")
+    travel_date_clalander = (By.ID,'travelDate')

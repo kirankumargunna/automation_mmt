@@ -15,6 +15,22 @@ from _wraper import helper
 class Webelement(Webdrivers):
 
     @classmethod
+    def wait(cls,timeout: int=10):
+        return WebDriverWait(cls._browser,timeout)
+
+    @classmethod
+    def wait_for_element_visible(cls, element_locator):
+        if not cls._browser:
+            raise ValueError("Browser not initialized. Call set_browser() first.")
+        return cls.wait().until(EC.presence_of_element_located(element_locator))  # Use presence if visibility is not required
+
+    @classmethod
+    def wait_for_all_elements_visible(cls, elements_locator):
+        if not cls._browser:
+            raise ValueError("Browser not initialized. Call set_browser() first.")
+        return cls.wait().until(EC.visibility_of_all_elements_located( elements_locator))
+
+    @classmethod
     def findElement(cls, element_locator):
 
         """
@@ -25,8 +41,9 @@ class Webelement(Webdrivers):
         if not cls._browser:
             raise ValueError("Browser not initialized. Call set_browser() first.")
 
-        return cls._browser.find_element(*element_locator)
-
+        if cls.wait_for_element_visible(element_locator):
+            return cls._browser.find_element(*element_locator)
+        else: print("element not available")
 
     @classmethod
     def findElements(cls, element_locator):
@@ -38,13 +55,14 @@ class Webelement(Webdrivers):
         """
         if not cls._browser:
             raise ValueError("Browser not initialized. Call set_browser() first.")
+        cls.wait_for_all_elements_visible(element_locator)
         return cls._browser.find_elements(*element_locator)
 
     @classmethod
     def click_element(cls,element_locator):
         if not cls._browser:
             raise ValueError("Browser not initialized. Call pytest_start_browser() first.")
-        element=cls.wait_for_element_presence(element_locator)
+        element=cls.wait_for_element_visible(element_locator)
         element.click()
 
     @classmethod
@@ -139,21 +157,7 @@ class Webelement(Webdrivers):
         print(handles)
         cls._browser.switch_to.window(handles[int(tab)])
 
-    @classmethod
-    def wait(cls,timeout: int):
-        return WebDriverWait(cls._browser,timeout)
 
-    @classmethod
-    def wait_for_element_presence(cls, element_locator):
-        if not cls._browser:
-            raise ValueError("Browser not initialized. Call set_browser() first.")
-        return cls.wait(10).until(EC.presence_of_element_located(element_locator))
-
-    @classmethod
-    def wait_for_all_elements_presence(cls, elements_locator):
-        if not cls._browser:
-            raise ValueError("Browser not initialized. Call set_browser() first.")
-        return cls.wait(10).until(EC.presence_of_all_elements_located( elements_locator))
 
     @classmethod
     def mousehover(cls,element_locator):
@@ -167,9 +171,13 @@ class Webelement(Webdrivers):
 
     @classmethod
     def send_text(cls,element_locator,text):
-        element=cls.wait_for_element_presence(element_locator)
+        element=cls.findElement(element_locator)
+        element.click()
+
         element.send_keys(text)
+        time.sleep(2)
         element.send_keys(Keys.DOWN)
+        time.sleep(2)
         element.send_keys(Keys.ENTER)
 
     @classmethod

@@ -23,6 +23,8 @@ class Homepage_mmt(BasePageFragments):
     input_field=homepage_locators.INPUT_FIELD
     depature=homepage_locators.DEPATURE
     search=homepage_locators.SEARCH
+    Bus=homepage_locators.buses_icon
+    travelDate=homepage_locators.travel_date_clalander
 
 
 
@@ -56,10 +58,21 @@ class Homepage_mmt(BasePageFragments):
         Webelement.click_element(Homepage_mmt.source_city)
         Webelement.send_text(Homepage_mmt.input_field,self.homepagedata.Domestic_cities[1])
         Webelement.click_element(Homepage_mmt.destination_city)
-        Webelement.send_text(Homepage_mmt.input_field,homepagedata.International_cities[1])
-        Webelement.click_element(Homepage_mmt.depature)
+        Webelement.send_text(Homepage_mmt.input_field,self.homepagedata.International_cities[1])
+        # Webelement.click_element(Homepage_mmt.depature)
         Webelement.set_date(homepagedata.travel_date)
         Webelement.click_element(Homepage_mmt.search)
 
+    def bus_search(self):
+        Webelement.click_element(Homepage_mmt.Bus)
+        Webelement.click_element(Homepage_mmt.source_city)
+        Webelement.send_text(Homepage_mmt.input_field,self.homepagedata.Domestic_cities[1])
+        if not Webelement.is_element_displayed(Homepage_mmt.input_field):
+            Webelement.click_element(Homepage_mmt.destination_city)
+        Webelement.send_text(Homepage_mmt.input_field,self.homepagedata.Domestic_cities[0])
 
+        if not Webelement.is_element_displayed(Homepage_mmt.travelDate):
+            Webelement.click_element(Homepage_mmt.travelDate)
+        Webelement.set_date(homepagedata.travel_date)
+        Webelement.click_element(Homepage_mmt.search)
 
