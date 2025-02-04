@@ -47,7 +47,6 @@ class Webelement(Webdrivers):
 
     @classmethod
     def findElements(cls, element_locator):
-    def findElements(cls, element_locator):
 
         """
         returns web element for given element locator
