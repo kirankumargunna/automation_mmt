@@ -9,3 +9,4 @@ class homepagedata:
     International_cities=["Dubai", "Singapore", "London", "New York", "Paris","Bangkok", "Sydney", "Toronto", "Kuala Lumpur", "Tokyo" ]
 
     travel_date= "Feb 28, 2025"
+

@@ -22,22 +22,18 @@ class Homepage_mmt(BasePageFragments):
     source_city=homepage_locators.FROM_CITY
     destination_city=homepage_locators.TO_CITY
     input_field=homepage_locators.INPUT_FIELD
-    depature=homepage_locators.DEPATURE
+    depature=homepage_locators.DEPATURE # for flights
     search=homepage_locators.SEARCH
     Bus=homepage_locators.buses_icon
-    travelDate=homepage_locators.travel_date_clalander
+    travelDate=homepage_locators.travel_date_clalander # for buses and trains
 
 
 
     def logo_visablity_and_navigation(self):
         assert Webelement.is_element_displayed(Homepage_mmt.logo_mmt), "make my trip logo  is not displayed"
         assert Webelement.verify_page_refresh(Homepage_mmt.logo_mmt), "page not refreshed on clicking mmt logo"
-        assert Webelement.is_element_displayed(Homepage_mmt.logo_mmt), "make my trip logo  is not displayed"
-        assert Webelement.verify_page_refresh(Homepage_mmt.logo_mmt), "page not refreshed on clicking mmt logo"
 
     def list_your_property_hyperlink(self):
-        assert Webelement.is_element_displayed(Homepage_mmt.list_your_property), "list you propert hyperlink is not displayed"
-        assert Webelement.verify_new_tab(Homepage_mmt.list_your_property)==homepagedata.list_your_properties_pageTitle
         assert Webelement.is_element_displayed(Homepage_mmt.list_your_property), "list you propert hyperlink is not displayed"
         assert Webelement.verify_new_tab(Homepage_mmt.list_your_property)==homepagedata.list_your_properties_pageTitle
         Homepage_mmt.close_current_tab()
