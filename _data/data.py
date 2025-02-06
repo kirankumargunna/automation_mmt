@@ -10,3 +10,9 @@ class homepagedata:
 
     travel_date= "Feb 28, 2025"
 
+
+
+class flightpageData:
+    
+    Trip_types=['One Way', 'Round Trip', 'Multi City']  
+
