@@ -1,6 +1,5 @@
 import time
 
-from numpy.ma.testutils import assert_equal
 from selenium.webdriver.common.by import By
 
 from Drivers.webdrivers import Webdrivers
@@ -13,19 +12,19 @@ from _data.data import homepagedata
 
 
 class Homepage_mmt(BasePageFragments):
-    logo_mmt = homepage_locators.MMT_LOGO
+    logo_mmt = homepage_locators.MMT_LOGO_HOMEPAGE
     list_your_property = homepage_locators.LIST_YOUR_PROPERTY
     introducing_Mybiz=homepage_locators.INTROUDUCING_MYBIZ
     toolTip_introducing_mybiz=homepage_locators.TOOLTIP_INTROUDUCING_MYBIZ
     login_or_createAccount=homepage_locators.LOGIN_OR_CREATEACCOUNT
-    navigation_bar=homepage_locators.ICONS_NAVIGATION_BAR
-    source_city=homepage_locators.FROM_CITY
-    destination_city=homepage_locators.TO_CITY
-    input_field=homepage_locators.INPUT_FIELD
+    navigation_bar=homepage_locators.ICON_IN_STICKY_HEADER
+    source_city=homepage_locators.FROM_CITY_INPUT
+    destination_city=homepage_locators.TO_CITY_INPUT
+    input_field=homepage_locators.SEARCH_INPUT_FIELD
     depature=homepage_locators.DEPATURE # for flights
-    search=homepage_locators.SEARCH
-    Bus=homepage_locators.buses_icon
-    travelDate=homepage_locators.travel_date_clalander # for buses and trains
+    search=homepage_locators.SEARCH_BUTTON
+    Bus=homepage_locators.BUSES_ICON
+    travelDate=homepage_locators.TRAVEL_DATE_CALENDAR # for buses and trains
 
 
 
