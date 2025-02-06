@@ -1,11 +1,12 @@
 from typing import List
 from selenium.webdriver.support.ui import Select
+from _data.data import homepagedata
 from _wraper.webelements import Webelement
 from Locators.flightPage_locators import flightPage_locators
-from Pages.base_page import BasePageFragments
+from Pages.HomePage import Homepage_mmt
 
 
-class flights_MMT(BasePageFragments):
+class flights_MMT(Homepage_mmt):
 
     search_bar=flightPage_locators.SEARCH_BAR
     fareType_bar=flightPage_locators.FARETYPE_BAR
@@ -34,8 +35,20 @@ class flights_MMT(BasePageFragments):
             element=Webelement.findElement(flights_MMT.trip_type_dropdown)
             dropdown=Select(element)
             dropdown.select_by_visible_text(trip_type)
+
+
     def enter_to_and_from_city(self):
-        
+        Webelement.click_element(Homepage_mmt.source_city)
+        Webelement.send_text(Homepage_mmt.input_field,self.homepagedata.Domestic_cities[1])
+        Webelement.click_element(Homepage_mmt.destination_city)
+        Webelement.send_text(Homepage_mmt.input_field,self.homepagedata.International_cities[1])
+    
+    def select_date(self):
+        Webelement.set_date(homepagedata.travel_date)
+    
+    def click_search_button(self):
+        assert self.verfiy_search_button_status, "search button is not enabled"
+        Webelement.click_element(flights_MMT.search_button_enabled)
         
 
 
