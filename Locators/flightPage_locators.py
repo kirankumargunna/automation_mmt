@@ -14,6 +14,10 @@ class flightPage_locators(Baselocators):
         WEEKLY_FARE_BANNER = (By.ID, 'weeklyFare')
         SORT_BY_TAB = (By.ID, "//div[@class='sortTabsWrapper appendTop20']")
         AVAILABLE_FLIGHTS = (By.XPATH, "//div[@class=' ']")
-
+        SEARCH_BUTTON_DISABLED=(By.XPATH,"//span[@class='disable-btn-txt']")
+        SEARCH_BUTTON_ENABLED=(BY.ID,"search-button")
+        CURRENT_TRIP_TYPE=(By.XPATH,"//div[@class='multiDropDownVal']")
+        TRIP_TYPE_DROPDOWN=(By.XPATH,"//div[@class='dropDownList']")
+        
 
 

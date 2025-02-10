@@ -19,4 +19,4 @@ class homepage_locators(Baselocators):
     SEARCH_BUTTON=(By.XPATH,"//*[contains(@class,'primaryBtn font24 latoBold widgetSearchBtn')]")
 
     BUSES_ICON=(By.XPATH,"//span[@class='chNavIcon appendBottom2 chSprite chBuses inactive']")
-    travel_date_clalander = (By.ID,'travelDate')
+    TRAVEL_DATE_CALENDAR = (By.ID,'travelDate')

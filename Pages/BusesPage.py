@@ -1,5 +1,4 @@
-from Pages.base_page import BasePageFragments
+# from Pages.base_page import BasePageFragments
 
 
-class buses_mmt(BasePageFragments):
-
+# class buses_mmt(BasePageFragments):

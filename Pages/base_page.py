@@ -54,10 +54,10 @@ class BasePageFragments(Webelement):
 
         # Now compare both lists
         if sorted(actual_elements) == sorted(expected_elements):
-            print("The elements in the sticky header match.")
+            print("The elements in the sticky header matched.")
             return True
         else:
-            print("The elements in the sticky header do not match.")
+            print("The elements in the sticky header do not matched.")
             print("Expected:", expected_elements)
             print("Actual:", actual_elements)
             return False
