@@ -1,6 +1,8 @@
 import pytest
 import toml
 from _pytest.nodes import Item
+from pygments.lexer import default
+
 from _wraper.DriverInitilization import DriverInitilization
 
 
@@ -16,6 +18,14 @@ def pytest_addoption(parser):
         default="chrome",
         help="specify the driver to run the test"
     )
+    parser.addoption(
+        "--threads",
+        action="store",
+        default=1,
+        type=int,esir
+        help="no of parallel workers"
+    )
+
 
 
 def pytest_runtest_setup(item:Item) -> None:
