@@ -14,12 +14,14 @@ class flights_MMT(Homepage_mmt):
     search_button_enabled=flightPage_locators.SEARCH_BUTTON_ENABLED
     current_trip_type=flightPage_locators.CURRENT_TRIP_TYPE
     trip_type_dropdown=flightPage_locators.TRIP_TYPE_DROPDOWN
+    fareType=flightPage_locators.FARE_TYPE
+    avilable_filters=flightPage_locators.FILTERS_FLIGHTS
 
 
-    def verfy_search_bar_flightPage(self):
+    def verify_search_bar_flightPage(self):
         assert Webelement.findElement(flights_MMT.search_bar) , "search bar is not dispaled in flight page"
 
-    def verfiy_fareType_bar(self):
+    def verify_fareType_bar(self):
         assert Webelement.findElement(flights_MMT.fareType_bar), "fare type bar is not displayed"
     
     def verfiy_search_button_status(self):
@@ -39,9 +41,9 @@ class flights_MMT(Homepage_mmt):
 
     def enter_to_and_from_city(self):
         Webelement.click_element(Homepage_mmt.source_city)
-        Webelement.send_text(Homepage_mmt.input_field,self.homepagedata.Domestic_cities[1])
+        Webelement.send_text(Homepage_mmt.input_field,self.homepagedata.Domestic_cities[2])
         Webelement.click_element(Homepage_mmt.destination_city)
-        Webelement.send_text(Homepage_mmt.input_field,self.homepagedata.International_cities[1])
+        Webelement.send_text(Homepage_mmt.input_field,self.homepagedata.International_cities[2])
     
     def select_date(self):
         Webelement.set_date(homepagedata.travel_date)
@@ -49,6 +51,19 @@ class flights_MMT(Homepage_mmt):
     def click_search_button(self):
         assert self.verfiy_search_button_status, "search button is not enabled"
         Webelement.click_element(flights_MMT.search_button_enabled)
+        
+    def select_fare_type(self):
+        Webelement.click_element(flights_MMT.fareType)
+
+    def avilableFilters(self)->list[str]:
+        filters=[]
+        elements=Webelement.findElements(flights_MMT.avilable_filters)
+        for element in elements:
+            filters.append(element.text)
+
+        return filters
+    
+
         
 
 
