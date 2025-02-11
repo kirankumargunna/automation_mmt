@@ -18,13 +18,7 @@ def pytest_addoption(parser):
         default="chrome",
         help="specify the driver to run the test"
     )
-    parser.addoption(
-        "--threads",
-        action="store",
-        default=1,
-        type=int,esir
-        help="no of parallel workers"
-    )
+    
 
 
 
@@ -43,19 +37,24 @@ def pytest_runtest_setup(item:Item) -> None:
     # Read pyproject.toml
     config = toml.load("pyproject.toml")
 
+    # Get browser type from CLI options
     browser = item.config.getoption("driver")
 
     # Get the base_url from the pyproject.toml
     base_url = config.get("tool", {}).get("myapp", {}).get("base_url", "default_url")
 
-    #initilize driver
+    #initilize a seperate webdriver inistance for each test
+    webdriver_instance=Webdrivers()
 
-    Webdrivers().pytest_start_browser(browser=browser)
-    driver=Webdrivers._browser
-    driver.get(base_url)
+    webdriver_instance.pytest_start_browser(browser=browser)  # start browser
+
+    # Store the WebDriver instance in test class instance to avoid conflicts
+    web_driver=webdriver_instance._browser
+    item.cls.driver = web_driver
+    item.cls.driver.get(base_url)
 
 
-def pytest_runtest_teardown()-> None:
+def pytest_runtest_teardown(item:Item)-> None:
     """Pytest hook for teardown after each test.
 
         Checks if the 'driver' variable is present in the local or global namespace.
@@ -68,5 +67,6 @@ def pytest_runtest_teardown()-> None:
             None
         """
 
-    if "driver" in locals() or "driver" in globals():
-        driver.quit()
+    if hasattr(item.cls, "driver"):  # Check if WebDriver exists
+            item.cls.driver.quit()  # Close the browser
+            item.cls.driver = None 
