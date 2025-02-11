@@ -1,13 +1,13 @@
 import pytest 
 import allure
-from Tests.test_mmt_homepage import Test_mmt_homepage
+from Pages.HomePage import Homepage_mmt
+from Pages.base_page import BasePageFragments
 from Pages.flightspage import flights_MMT
-from _data.data import flightpageData as FD
+from _data.data import flightpageData as FD, homepagedata as HD
 
 
 
-
-class Test_mmt_flightapage(Test_mmt_homepage):
+class Test_mmt_flightapage(BasePageFragments):
 
     @allure.title("flight page smoke test")
     @allure.description("To verify all the elements are loaded in the flight search page")
@@ -19,8 +19,11 @@ class Test_mmt_flightapage(Test_mmt_homepage):
         
 
         # search for the flights in home page 
+        BasePageFragments.close_login_model(self)
+        Homepage_mmt.flight_search(self)
 
-        Test_mmt_homepage.test_flights_homepage(self)
+        #verfiy mmt logo is visable and navigates to home page on clicking 
+        flights_MMT.logo_visability_and_navigation_in_pages(self)
 
         # verify that search bar is displayed 
         flights_MMT.verify_search_bar_flightPage(self)
@@ -38,13 +41,24 @@ class Test_mmt_flightapage(Test_mmt_homepage):
 
         assert sorted(Avilable_Filters) == sorted(FD.Filters), f"Missing: {missing}, Extra: {extra}"
 
+        #verify the avilable icons in the filghts page sticky header
+
+        Avilable_icons=flights_MMT.avilable_icons_stick_yHeader(self)
+
+        missing = set(HD.elements_navigation_bar) - set(Avilable_icons)  # Elements in FD.Filters but not in Avilable_Flights
+        extra = set(Avilable_icons) - set(HD.elements_navigation_bar)  # Elements in Avilable_Flights but not in FD.Filters
+
+        assert sorted(Avilable_icons) == sorted(HD.elements_navigation_bar), f"Missing: {missing}, Extra: {extra}"
+
+
+
 
     @pytest.mark.flightpage
-    def Test_flight_search_valid_data(self):
+    def test_flight_search_valid_data(self):
 
-        Test_mmt_flightapage.close_login_model(self)
+        BasePageFragments.close_login_model(self)
         #search for flight with valid data in home page 
-        Test_mmt_homepage.test_flights_homepage(self)
+        Homepage_mmt.flight_search(self)
 
         #verfiy search button is disabled initally
         assert not flights_MMT.verfiy_search_button_status(self) , "search button in disabled intially"

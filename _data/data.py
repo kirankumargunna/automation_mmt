@@ -26,3 +26,4 @@ class flightpageData:
              f'Arrival at {homepagedata.International_cities[1]}',
              'Airlines'
                ]
+    

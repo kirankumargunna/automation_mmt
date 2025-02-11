@@ -16,6 +16,8 @@ class flights_MMT(Homepage_mmt):
     trip_type_dropdown=flightPage_locators.TRIP_TYPE_DROPDOWN
     fareType=flightPage_locators.FARE_TYPE
     avilable_filters=flightPage_locators.FILTERS_FLIGHTS
+    avilable_icons_stickyHeader=flightPage_locators.ICON_IN_STICKY_HEADER
+
 
 
     def verify_search_bar_flightPage(self):
@@ -63,7 +65,11 @@ class flights_MMT(Homepage_mmt):
 
         return filters
     
+    def avilable_icons_stick_yHeader(self):
+        elements=Webelement.findElements(flights_MMT.avilable_icons_stickyHeader)
+        icons=[element.text for element in elements]
 
+        return icons
         
 
 
