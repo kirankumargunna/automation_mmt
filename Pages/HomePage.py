@@ -42,8 +42,8 @@ class Homepage_mmt(BasePageFragments):
     def introducing_mybiz(self):
         assert Webelement.is_element_displayed(Homepage_mmt.introducing_Mybiz), "introducing mybiz hyperlink is not displayed"
         Webelement.mousehover(Homepage_mmt.introducing_Mybiz)
-        # assert Webelement.is_element_displayed(Homepage_mmt.toolTip_introducing_mybiz)=='SWITCH TO MYBIZ', "tooltip introducing mybiz is not displayed "
-        assert_equal(Webelement.is_element_displayed(Homepage_mmt.toolTip_introducing_mybiz).text,"SWITCH TO MYBIZ","tooltip introducing mybiz is not displayed")
+        assert Webelement.is_element_displayed(Homepage_mmt.toolTip_introducing_mybiz).text=='SWITCH TO MYBIZ', "tooltip introducing mybiz is not displayed "
+        # assert_equal(Webelement.is_element_displayed(Homepage_mmt.toolTip_introducing_mybiz).text,"SWITCH TO MYBIZ","tooltip introducing mybiz is not displayed")
     def login_or_createaccount(self):
         assert Webelement.is_element_displayed(Homepage_mmt.login_or_createAccount), "login option is not displayed on home page"
         Webelement.click_element(Homepage_mmt.login_or_createAccount)

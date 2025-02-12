@@ -36,7 +36,7 @@ class BasePageFragments(Webelement):
         assert Webelement.verify_page_refresh(BasePageFragments.logo_stickheader), "page not refreshed on clicking mmt logo"
         assert Webelement.findElements(BasePageFragments.logo_mmt_homepage), "not navigated to on clicking MMT logo in stick header"
 
-    def verify_elements_sticky_header(self, elements: List[str]) -> bool:
+    def verify_elements_sticky_header_in_pages(self, elements: List[str]) -> bool:
         """
         Verifies whether the elements in the sticky header match the expected elements.
 

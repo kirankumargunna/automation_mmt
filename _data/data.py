@@ -16,3 +16,14 @@ class flightpageData:
     
     Trip_types=['One Way', 'Round Trip', 'Multi City']  
 
+    Fare_types=['Regular', 'student', 'senior Citizen', 'Armed Forces', 'Doctor and Nurse']
+
+    Filters=['Applied Filters', 
+             'Popular Filters', 
+             'One Way Price', 
+             f'Stops From {homepagedata.Domestic_cities[1]}',
+             f'Depature From {homepagedata.Domestic_cities[1]}',
+             f'Arrival at {homepagedata.International_cities[1]}',
+             'Airlines'
+               ]
+    
