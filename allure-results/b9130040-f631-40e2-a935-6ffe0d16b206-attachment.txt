@@ -1,0 +1,5 @@
+✅ Page refreshed successfully after clicking the logo.
+✅ New tab opened successfully.
+['D70D2368ABB2B8BB35D453A1EB0694E3', '398F8609F74BD575C0A9B8D2C10DD963']
+Goibibo & MakeMytrip - Free Hotel Registration - Add your Hotel with Connect (Ingo-MMT)
+['D70D2368ABB2B8BB35D453A1EB0694E3']
