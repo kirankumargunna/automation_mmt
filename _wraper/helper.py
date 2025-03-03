@@ -1,5 +1,5 @@
-import inspect
-from datetime import datetime, timedelta
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
 
 
 
@@ -23,7 +23,7 @@ def get_formatted_fail_message(expected,actual,error_message):
     return "{0}\n Actual:'{1}'\n Expected:{2}".format(error_message,actual,expected)
 
 
-def convert_date(date_input):
+def convert_date(date_input)-> tuple[str, str] | str:
     formats = [
         "%Y-%m-%d",        # 2024-11-30
         "%d/%m/%Y",        # 30/11/2024
@@ -54,12 +54,14 @@ def convert_date(date_input):
 
 
 
-def is_valid_date(user_date):
+def is_valid_date(user_date)-> bool:
     """
     Check if the user-provided date is within the range of 3 months from today's date.
     """
     today = datetime.today()
-    three_months_later = today + timedelta(days=90)  # Approximate 3 months as 90 days
+    # three_months_later = today + timedelta(days=90)  # Approximate 3 months as 90 days
+    three_months_later = today + relativedelta(months=3)
+
 
     # Check if the input date is within the range of today and 3 months from now
     if today <= user_date <= three_months_later:
@@ -68,14 +70,13 @@ def is_valid_date(user_date):
 
 
 
-def get_date_of_travel(date):
+def get_date_of_travel(date)-> tuple[str, str]:
     """
     Prompt the user to input a valid date within the next 3 months in various formats.
     """
     while True:
-        Travel_date=date
-
-        converted_date, month_year = convert_date(Travel_date)
+        
+        converted_date, month_year = convert_date(date)
 
         if converted_date == "invalid date format":
             print("Invalid date format. Please try again.")

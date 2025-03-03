@@ -13,8 +13,7 @@ if not os.path.exists(log_directory):
 
 process_id=multiprocessing.current_process().pid
 
-log_file = os.path.join(log_directory, f"test_log_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}_pid{process_id}.log")
+log_file = os.path.join(log_directory, f"test_log_{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S_%f')}_pid{process_id}.log")
 
 
-# configure logging 
 

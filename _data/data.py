@@ -1,29 +1,52 @@
-class homepagedata:
-    list_your_properties_pageTitle="Goibibo & MakeMytrip - Free Hotel Registration - Add your Hotel with Connect (Ingo-MMT)"
+from enum import Enum
 
-    elements_navigation_bar=["Flights", "Hotels", "Homestays & Villas", "Holiday Packages", "Trains", "Buses", "Cabs", "Forex Card & Currency", "Travel Insurance"]
+class HomePageData:
+    LIST_YOUR_PROPERTIES_PAGE_TITLE = "Goibibo & MakeMytrip - Free Hotel Registration - Add your Hotel with Connect (Ingo-MMT)"
 
-    # List of cities for MMT
-    Domestic_cities = ["Delhi", "Mumbai", "Bangalore", "Hyderabad", "Chennai", "Kolkata", "Pune", "Ahmedabad", "Jaipur", "Lucknow"]
+    NAVIGATION_BAR_ELEMENTS = [
+        "Flights", "Hotels", "Homestays & Villas", "Holiday Packages",
+        "Trains", "Buses", "Cabs", "Forex Card & Currency", "Travel Insurance"
+    ]
 
-    International_cities=["Dubai", "Singapore", "London", "New York", "Paris","Bangkok", "Sydney", "Toronto", "Kuala Lumpur", "Tokyo" ]
+    DOMESTIC_CITIES = [
+        "Delhi", "Mumbai", "Bangalore", "Hyderabad", "Chennai",
+        "Kolkata", "Pune", "Ahmedabad", "Jaipur", "Lucknow"
+    ]
 
-    travel_date= "Feb 28, 2025"
+    INTERNATIONAL_CITIES = [
+        "Dubai", "Singapore", "London", "New York", "Paris",
+        "Bangkok", "Sydney", "Toronto", "Kuala Lumpur", "Tokyo"
+    ]
 
+    TRAVEL_DATE = "Feb 28, 2025"
 
+class TripType(Enum):
+    ONE_WAY = "One Way"
+    ROUND_TRIP = "Round Trip"
+    MULTI_CITY = "Multi City"
 
-class flightpageData:
-    
-    Trip_types=['One Way', 'Round Trip', 'Multi City']  
+class FareType(Enum):
+    REGULAR = "Regular"
+    STUDENT = "Student"
+    SENIOR_CITIZEN = "Senior Citizen"
+    ARMED_FORCES = "Armed Forces"
+    DOCTOR_NURSE = "Doctor and Nurse"
 
-    Fare_types=['Regular', 'student', 'senior Citizen', 'Armed Forces', 'Doctor and Nurse']
+class FlightPageData:
+    TRIP_TYPES = [trip.value for trip in TripType]
+    FARE_TYPES = [fare.value for fare in FareType]
 
-    Filters=['Applied Filters', 
-             'Popular Filters', 
-             'One Way Price', 
-             f'Stops From {homepagedata.Domestic_cities[1]}',
-             f'Depature From {homepagedata.Domestic_cities[1]}',
-             f'Arrival at {homepagedata.International_cities[1]}',
-             'Airlines'
-               ]
+    @staticmethod
+    def get_city(index, cities_list):
+        return cities_list[index] if index < len(cities_list) else "Unknown"
+
+    FILTERS = [
+        "Applied Filters",
+        "Popular Filters",
+        "One Way Price",
+        f"Stops From {HomePageData.DOMESTIC_CITIES[1]}",
+        f"Departure From {HomePageData.DOMESTIC_CITIES[1]}",
+        f"Arrival at {HomePageData.INTERNATIONAL_CITIES[1]}",
+        "Airlines"
+    ]
     
