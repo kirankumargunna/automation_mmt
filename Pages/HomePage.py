@@ -7,7 +7,7 @@ from Locators.homepage_locators import homepage_locators
 from Pages.base_page import BasePageFragments
 from Pages.base_page import BasePageFragments
 from _wraper.webelements import Webelement
-from _data.data import homepagedata
+from _data.data import HomePageData
 
 
 
@@ -34,7 +34,7 @@ class Homepage_mmt(BasePageFragments):
 
     def list_your_property_hyperlink(self):
         assert Webelement.is_element_displayed(Homepage_mmt.list_your_property), "list you propert hyperlink is not displayed"
-        assert Webelement.verify_new_tab(Homepage_mmt.list_your_property)==homepagedata.list_your_properties_pageTitle
+        assert Webelement.verify_new_tab(Homepage_mmt.list_your_property)==HomePageData.list_your_properties_pageTitle
         Homepage_mmt.close_current_tab()
         Homepage_mmt.switch_tab(0)
         time.sleep(3)
@@ -60,7 +60,7 @@ class Homepage_mmt(BasePageFragments):
         Webelement.click_element(Homepage_mmt.destination_city)
         Webelement.send_text(Homepage_mmt.input_field,self.homepagedata.International_cities[1])
         # Webelement.click_element(Homepage_mmt.depature)
-        Webelement.set_date(homepagedata.travel_date)
+        Webelement.set_date(HomePageData.travel_date)
         Webelement.click_element(Homepage_mmt.search)
 
     def bus_search(self):
@@ -73,6 +73,6 @@ class Homepage_mmt(BasePageFragments):
 
         if not Webelement.is_element_displayed(Homepage_mmt.travelDate):
             Webelement.click_element(Homepage_mmt.travelDate)
-        Webelement.set_date(homepagedata.travel_date)
+        Webelement.set_date(HomePageData.travel_date)
         Webelement.click_element(Homepage_mmt.search)
 

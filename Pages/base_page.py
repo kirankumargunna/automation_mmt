@@ -2,7 +2,7 @@ from typing import List
 
 from Locators.homepage_locators import homepage_locators
 from _wraper.webelements import Webelement
-from _data.data import homepagedata
+from _data.data import HomePageData
 from _wraper import helper
 
 class BasePageFragments(Webelement):
@@ -17,7 +17,7 @@ class BasePageFragments(Webelement):
 
     @classmethod
     def setup_method(cls):
-        cls.homepagedata=homepagedata()
+        cls.homepagedata=HomePageData()
         cls.h=helper
 
     def close_login_model(self):

@@ -1,6 +1,4 @@
 import time
-
-from pyautogui import click
 from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 
@@ -8,7 +6,7 @@ from Drivers.webdrivers import Webdrivers
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-from _data.data import homepagedata
+from _data.data import HomePageData
 from _wraper import helper
 
 
@@ -22,7 +20,7 @@ class Webelement(Webdrivers):
     def wait_for_element_visible(cls, element_locator):
         if not cls._browser:
             raise ValueError("Browser not initialized. Call set_browser() first.")
-        return cls.wait().until(EC.presence_of_element_located(element_locator))  # Use presence if visibility is not required
+        return cls.wait().until(EC.visibility_of_element_located(element_locator))  # Use presence if visibility is not required
 
     @classmethod
     def wait_for_all_elements_visible(cls, elements_locator):
@@ -70,8 +68,8 @@ class Webelement(Webdrivers):
         if not cls._browser:
             raise ValueError("Browser not initialized. Call pytest_start_browser() first.")
         element = cls.findElement(element_locator)
-        return element
-        # return element.is_displayed()
+        return  element.is_displayed()
+
 
     @classmethod
     def verify_page_refresh(cls,element_locator):
@@ -98,7 +96,6 @@ class Webelement(Webdrivers):
 
         # tirgger a potential refresh
         element=cls.findElement(element_locator)
-        element=cls.findElement(element_locator)
         element.click()
 
         # wait for the page to refresh
@@ -119,9 +116,7 @@ class Webelement(Webdrivers):
     @classmethod
     def page_title(cls):
         return cls._browser.title
-    @classmethod
-    def page_title(cls):
-        return cls._browser.title
+    
     @classmethod
     def verify_new_tab(cls, element_locator=None):
 
@@ -130,11 +125,10 @@ class Webelement(Webdrivers):
 
         # click the hyperlink (expected to open a new tab)
         element=cls.findElement(element_locator)
-        element=cls.findElement(element_locator)
         element.click()
 
         #wait for the tab to open
-        time.sleep(3)
+        cls.wait().until(EC.new_window_is_opened(initial_tabs))
 
         new_tabs=cls._browser.window_handles
         if len(new_tabs) > len(initial_tabs):
@@ -147,7 +141,6 @@ class Webelement(Webdrivers):
 
             # return the new tap page title
 
-            return cls.page_title()
             return cls.page_title()
         else:
             print("❌ No new tab opened.")
@@ -163,14 +156,7 @@ class Webelement(Webdrivers):
         print(handles)
         cls._browser.switch_to.window(handles[int(tab)])
 
-    @classmethod
-    def switch_tab(cls,tab):
-        handles=cls._browser.window_handles
-        print(handles)
-        cls._browser.switch_to.window(handles[int(tab)])
-
-
-
+   
     @classmethod
     def mousehover(cls,element_locator):
         element=cls.findElement(element_locator)
@@ -178,14 +164,23 @@ class Webelement(Webdrivers):
 
     @classmethod
     def gettext(cls,element_locator):
-        element=cls.findElement(element_locator)
-        return element.text
+        try:
+            element=cls.findElement(element_locator)
+            if element:
+                return element.text
+            else:
+                print(f"❌ Element {element_locator} not found!")
+            return None
+        except Exception as e:
+            print(f"⚠️ Error while getting text from {element_locator}: {e}")
+            return None
+
+
 
     @classmethod
     def send_text(cls,element_locator,text):
         element=cls.findElement(element_locator)
         element.click()
-
         element.send_keys(text)
         time.sleep(2)
         element.send_keys(Keys.DOWN)
@@ -206,7 +201,6 @@ class Webelement(Webdrivers):
                 # If the element is not found, print an error and continue to the next iteration
                 print(f"Element not found, retrying... {e}")
                 next_month = Webelement.findElement((By.XPATH,"//span[@role='button' and @class='DayPicker-NavButton DayPicker-NavButton--next']"))
-                cls.click_element(next_month)
                 cls.click_element(next_month)
 
         Webelement.click_element((By.XPATH,f"//div[@role='gridcell' and @class='DayPicker-Day' and @aria-label='{date}']"))

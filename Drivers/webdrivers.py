@@ -12,7 +12,7 @@ class Webdrivers(DriverInitilization):
     @classmethod
     def pytest_start_browser(cls, browser):
 
-        if "chrome" in browser:
+        if browser.lower() == "chrome":
             options = ChromeOptions()
             options.add_experimental_option("detach", True)
             options.add_experimental_option("excludeSwitches", ["enable-automation"])
@@ -20,6 +20,7 @@ class Webdrivers(DriverInitilization):
             options.add_argument("--incognito")
             options.add_argument("--ignore-certificate-errors")
             options.add_argument("--ignore-ssl-errors")
+            options.add_argument("--headless=new") 
             driver = webdriver.Chrome(options=options)
 
         elif "edge" in browser:
@@ -29,6 +30,7 @@ class Webdrivers(DriverInitilization):
             options.add_argument("--start-maximized")
             options.add_argument('--ignore-certificate-errors')
             options.add_argument('--ignore-ssl-errors')
+            options.add_argument("--headless=new") 
             driver = webdriver.Edge(options=options)
 
         elif "firefox" in browser:
@@ -37,6 +39,7 @@ class Webdrivers(DriverInitilization):
             options.add_argument("--start-maximized")
             options.accept_untrusted_certs = True
             options.assume_untrusted_cert_issuer = True
+            options.add_argument("--headless=new") 
             driver = webdriver.Firefox(options=options)
 
         elif "safari" in browser:
@@ -56,7 +59,7 @@ class Webdrivers(DriverInitilization):
 
         # Add any additional setup logic (e.g., window handling, mouse setup)
         cls.mouse = webdriver.ActionChains(driver)
-        cls.window_handle = driver.window_handles[0]
+        cls.window_handle = driver.window_handles
 
         DriverInitilization().set_driver(driver)
 
